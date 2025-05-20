@@ -19,8 +19,10 @@ def prepare_data(test_size=0.2, random_state=42):
     data = pd.read_csv(path)
 
     # 必要な特徴量の選択と前処理
-    data = data[["Pclass", "Sex", "Age", "Fare", "Survived"]].dropna()
+    data = data[["Pclass", "Sex", "Age", "Fare", "Survived", "SibSp", "Parch", "Embarked"]].dropna()
     data["Sex"] = LabelEncoder().fit_transform(data["Sex"])  # 性別を数値に変換
+    
+    data["Embarked"] = LabelEncoder().fit_transform(data["Embarked"])
 
     # 整数型の列を浮動小数点型に変換
     data["Pclass"] = data["Pclass"].astype(float)
@@ -28,8 +30,11 @@ def prepare_data(test_size=0.2, random_state=42):
     data["Age"] = data["Age"].astype(float)
     data["Fare"] = data["Fare"].astype(float)
     data["Survived"] = data["Survived"].astype(float)
+    data["SibSp"] = data["SibSp"].astype(float)
+    data["Parch"] = data["Parch"].astype(float)
+    data["Embarked"] = data["Embarked"].astype(float)
 
-    X = data[["Pclass", "Sex", "Age", "Fare"]]
+    X = data[["Pclass", "Sex", "Age", "Fare","SibSp", "Parch", "Embarked"]]
     y = data["Survived"]
 
     # データ分割
