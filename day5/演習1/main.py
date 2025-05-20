@@ -21,6 +21,7 @@ def prepare_data(test_size=0.2, random_state=42):
     # 必要な特徴量の選択と前処理
     data = data[["Pclass", "Sex", "Age", "Fare", "Survived", "SibSp", "Parch", "Embarked"]].dropna()
     data["Sex"] = LabelEncoder().fit_transform(data["Sex"])  # 性別を数値に変換
+    
     data["Embarked"] = LabelEncoder().fit_transform(data["Embarked"])
 
     # 整数型の列を浮動小数点型に変換
